@@ -2,21 +2,22 @@ pipeline {
     agent any
 
     stages {
+
         stage('Clone') {
             steps {
-                git 'https://github.com/sivzz-22/Devops-local.git'
+                git branch: 'main', url: 'https://github.com/sivzz-22/Devops-local.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                sh 'docker compose build'
             }
         }
 
         stage('Run Containers') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'docker compose up -d'
             }
         }
 
@@ -28,7 +29,7 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'docker-compose down'
+                sh 'docker compose down'
             }
         }
     }
