@@ -15,9 +15,13 @@ pipeline {
             }
         }
 
-        stage('Cleanup Old Containers') {
+        stage('Force Cleanup') {
             steps {
-                sh 'docker-compose down || true'
+                sh '''
+                docker rm -f test_app || true
+                docker rm -f test_db || true
+                docker-compose down || true
+                '''
             }
         }
 
