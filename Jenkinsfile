@@ -11,13 +11,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker compose build'
+                sh 'docker build -t devop-local-app .'
             }
         }
 
         stage('Run Containers') {
             steps {
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'docker compose down'
+                sh 'docker-compose down'
             }
         }
     }
